@@ -4,7 +4,7 @@
 SHELL = /usr/bin/env bash -o pipefail
 .SHELLFLAGS = -ec
 
-all: submodule up listen notes
+all: submodule up notes
 
 ##@ General
 
@@ -33,12 +33,6 @@ up: ## Start docker compose
 down: ## Stop docker compose
 	@echo "Stopping docker compose, please wait..."
 	@docker compose down
-listen-emqx: ## Listen to the message from EMQX
-	@echo "Running the following commands to see the message from EMQX"
-	@docker logs -f mqttx
-listen-kafka: ## Listen to the message from Kafka consumer
-	@echo "Running the following commands to see the message from kafka consumer"
-	@docker exec -it kafka kafka-console-consumer.sh --topic my-vehicles --from-beginning --bootstrap-server localhost:9092
 
 notes:
 	@echo "Running the following commands to see the message from MQTTX"
